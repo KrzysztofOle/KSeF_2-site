@@ -11,3 +11,9 @@ evidence-driven integration bridge between KSeF 2.0 and Comarch ERP Optima.
 This repository contains presentation assets only. Application code, credentials,
 test invoices, SQL snapshots and research evidence remain in the private project
 repository.
+
+## Published project baseline
+
+The public content reflects **KSeF_2 0.7.0** (`55287fe`): the completed atomic workflow layer, UC-005 synchronization, the SC001–SC013 current-code KSeF DEMO regression framework for two isolated companies, and the continuing safety gate against direct Optima SQL writes.
+
+Last synchronized: 2026-07-15.
