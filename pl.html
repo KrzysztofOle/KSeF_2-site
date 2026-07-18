@@ -1,13 +1,157 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#07111f"><link rel="stylesheet" href="assets/styles.css"><script defer src="assets/site.js"></script><title>KSeF_2 — Bezpieczna integracja KSeF i Comarch ERP Optima</title><meta name="description" content="KSeF_2 0.7.0 to oparta na dowodach integracja z izolowaną regresją KSeF DEMO i kontrolowanymi badaniami Comarch ERP Optima."></head>
-<body><a class="skip-link" href="#content">Przejdź do treści</a><header class="site-header"><nav class="nav container" aria-label="Główna nawigacja"><a class="brand" href="pl.html"><span class="brand-mark">K2</span><span>KSeF_2</span></a><div class="nav-links"><a href="#project">Projekt</a><a href="#status">Status</a><a href="#architecture">Architektura</a><a href="#docs">Dokumentacja</a></div><div class="nav-actions"><a class="lang-link" href="index.html" lang="en" aria-label="English version">EN</a><button class="icon-button" data-theme-toggle type="button" aria-label="Zmień motyw">☼</button></div></nav></header>
-<main id="content"><section class="hero"><div class="container hero-grid"><div><div class="eyebrow">KSeF 2.0 × Comarch ERP Optima</div><h1>Integracja oparta na <span class="gradient">dowodach.</span></h1><p class="lead">Lokalny most, który zachowuje natywne dokumenty KSeF, izoluje kontekst każdej firmy i bada rzeczywiste zachowanie Optimy, zanim dopuści zapis do bazy. Wersja 0.7.0 dodaje regresję DEMO opartą na aktualnym workflow synchronizacji.</p><div class="cta-row"><a class="button primary" href="https://github.com/KrzysztofOle/KSeF_2-site">Zobacz źródła strony ↗</a><a class="button" href="#architecture">Poznaj architekturę</a></div></div>
-<div class="hero-panel" aria-label="Przepływ projektu"><div class="panel-top"><span class="mini-label">KONTROLOWANY PRZEPŁYW / DEMO</span><span class="signal">wersja 0.7.0</span></div><div class="flow"><div class="flow-item"><span class="flow-icon">01</span><div><strong>Brama KSeF</strong><span>uwierzytelnienie · sesja · retry</span></div><span class="arrow">↓</span></div><div class="flow-item"><span class="flow-icon">02</span><div><strong>Natywny XML</strong><span>zachowany · hash · izolacja</span></div><span class="arrow">↓</span></div><div class="flow-item"><span class="flow-icon">03</span><div><strong>Provider Optimy</strong><span>projekcja oparta na dowodach</span></div><span class="arrow">→</span></div></div><div class="metrics"><div class="metric"><b>0.7.0</b><span>aktualna wersja</span></div><div class="metric"><b>1077</b><span>zaliczonych testów</span></div><div class="metric"><b>DEMO ×2</b><span>izolowane firmy</span></div></div></div></div></section>
-<section id="project"><div class="container"><div class="section-head reveal"><div><div class="eyebrow">Co robi projekt</div><h2>Trzy granice. Jeden kontrolowany przepływ.</h2></div><p>KSeF_2 oddziela publiczne możliwości, szczegóły protokołu KSeF i zachowanie ERP, dzięki czemu rdzeń pozostaje testowalny i neutralny technologicznie.</p></div><div class="cards"><article class="card reveal"><span class="card-number">01 / KOMUNIKACJA</span><h3>KSeF API</h3><p>Uwierzytelnienie certyfikatem, typowane wyniki, ograniczone ponowienia i krótkotrwałe sesje za dedykowaną bramą.</p></article><article class="card reveal"><span class="card-number">02 / ZACHOWANIE</span><h3>Natywny dokument</h3><p>Oryginalny XML pozostaje dokumentem źródłowym. Izolacja firm, korelacja i integralność są jawne.</p></article><article class="card reveal"><span class="card-number">03 / ADAPTACJA</span><h3>Comarch Optima</h3><p>Struktury SQL i projekcje Optimy pozostają w Providerze opartym na kontrolowanych snapshotach, śladach i odkryciach.</p></article></div></div></section>
-<section id="status"><div class="container"><div class="section-head reveal"><div><div class="eyebrow">Aktualny status</div><h2>Uczciwe bramki, widoczne ograniczenia.</h2></div><p>„Zaimplementowane” oznacza potwierdzone w zadeklarowanym zakresie. Wyniki badań nie stają się automatycznie zgodą na bezpośredni zapis SQL.</p></div><div class="status-grid">
-<article class="status-card reveal"><header><h3>Workflow atomowe · UC-001–UC-008</h3><span class="badge green">Zaimplementowane</span></header><p>Warstwa atomowych workflow jest kompletna dla uwierzytelniania, odbioru, wysyłki, odświeżania statusu oraz walidacji konfiguracji i połączenia.</p><ul><li>kontrakty i autoryzacja powiązane z Company</li><li>typowane, zredagowane wyniki</li><li>rzeczywiste wycinki Gateway KSeF DEMO</li></ul></article>
-<article class="status-card reveal"><header><h3>UC-005 · Regresja DEMO</h3><span class="badge green">DEMO gotowe</span></header><p>Runner aktualnego kodu wykonuje stabilną specyfikację SC001–SC013 przez izolowane rooty UC-005 dla KO_PROJEKT_demo i SYLWIA_demo.</p><ul><li>unikalne FA(3) i bezpieczne raporty plikowe</li><li>SC010 i SC011 zachowane jako specification-only</li><li>wynik międzyfirmowy jest zbiorczy, bez dokładnej korelacji XML</li></ul></article>
-<article class="status-card reveal"><header><h3>Badania Optimy</h3><span class="badge blue">Dowody</span></header><p>Natywne zachowanie DKF jest odtwarzane z kontrolowanych snapshotów SQL i śladów Extended Events.</p><ul><li>model rekordu z 63 kolumnami</li><li>payloady JSON, XML i HTML</li><li>trwały rejestr odkryć</li></ul></article>
-<article class="status-card reveal"><header><h3>Bezpośredni zapis SQL</h3><span class="badge amber">Brak zgody</span></header><p>Mapowanie dry-run jest użyteczne, ale współbieżność, rollback, duplikaty i akceptacja w UI nadal wymagają dowodów.</p><ul><li>brak produkcyjnej ścieżki zapisu</li><li>przyszły zabezpieczony executor</li><li>akceptacja A/B względem natywnej Optimy</li></ul></article></div></div></section>
-<section id="architecture"><div class="container"><div class="section-head reveal"><div><div class="eyebrow">Architektura</div><h2>Porty na każdej zmiennej granicy.</h2></div><p>Rdzeń koordynuje możliwości biznesowe. Providery implementują jawne porty, a adaptery tłumaczą reprezentacje i transport.</p></div><div class="architecture reveal"><div class="arch-node"><b>Publiczne API</b><span>Neutralne transportowo żądania, autoryzacja i typowane wyniki.</span></div><div class="arch-arrow">→</div><div class="arch-node"><b>Rdzeń aplikacji</b><span>Kontekst firmy, workflow, koordynatory i natywne dokumenty.</span></div><div class="arch-arrow">→</div><div class="arch-node"><b>Providery</b><span>Brama KSeF, konfiguracja, składowanie i integracja specyficzna dla Optimy.</span></div></div><div class="principles"><div class="principle">Firma jest granicą wykonania i izolacji.</div><div class="principle">Rdzeń nie traktuje struktur ERP jako prawdy domenowej.</div><div class="principle">Poświadczenia i sesje nie przekraczają publicznych granic.</div><div class="principle">Natywny XML jest zachowany przed utworzeniem projekcji.</div></div><div class="notice">Bramka bezpieczeństwa: obecne dowody nie zezwalają na bezpośredni zapis do produkcyjnej bazy Optimy.</div></div></section>
-<section id="docs"><div class="container"><div class="section-head reveal"><div><div class="eyebrow">Dokumentacja</div><h2>Podążaj za źródłem prawdy.</h2></div><p>Dokumenty angielskie są nadrzędne. Polskie tłumaczenia mają przyrostek <code>_PL.md</code> i powstają na podstawie wersji angielskiej.</p></div><div class="docs-grid"><a class="doc-link" href="#architecture"><b>Architektura</b><span>Zasady, domena, porty, providery i roadmapa.</span></a><a class="doc-link" href="#architecture"><b>Rejestr ADR</b><span>Niezmienne decyzje architektoniczne.</span></a><a class="doc-link" href="#status"><b>Odkrycia</b><span>Trwałe ustalenia reverse engineeringu Optimy.</span></a><a class="doc-link" href="#status"><b>Roadmapa</b><span>Stan wersji 0.7.0 i kolejne bramki dowodowe.</span></a></div></div></section></main>
-<footer class="site-footer"><div class="container footer-row"><span>© <span data-year></span> KSeF_2 0.7.0 · Najpierw dowody, potem skutki uboczne.</span><span><a href="https://github.com/KrzysztofOle/KSeF_2-site">GitHub</a> · <a href="index.html">English</a></span></div></footer></body></html>
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07111f">
+  <meta name="description" content="KSeF_2 to niezależny od ERP framework w Pythonie: komunikacja z API KSeF, workflowy biznesowe, stabilne kontrakty publiczne i porty dla connectorów ERP.">
+  <link rel="canonical" href="https://krzysztofole.github.io/KSeF_2-site/pl.html">
+  <link rel="stylesheet" href="assets/styles.css">
+  <script defer src="assets/site.js"></script>
+  <title>KSeF_2 — Niezależny od ERP framework KSeF</title>
+</head>
+<body>
+  <a class="skip-link" href="#content">Przejdź do treści</a>
+  <header class="site-header">
+    <nav class="nav container" aria-label="Główna nawigacja">
+      <a class="brand" href="pl.html" aria-label="Strona główna KSeF_2"><span class="brand-mark">K2</span><span>KSeF_2</span></a>
+      <div class="nav-links">
+        <a href="#features">Funkcje</a>
+        <a href="#architecture">Architektura</a>
+        <a href="#getting-started">Pierwsze kroki</a>
+        <a href="#ecosystem">Ekosystem</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="nav-actions">
+        <a class="lang-link" href="index.html" lang="en" aria-label="English version">EN</a>
+        <button class="icon-button" data-theme-toggle type="button" aria-label="Włącz jasny motyw">☼</button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="content">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Uniwersalny fundament KSeF</div>
+          <h1>Buduj na KSeF, <span class="gradient">nie wokół jednego ERP.</span></h1>
+          <p class="lead">KSeF_2 to niezależny framework w Pythonie do bezpiecznej komunikacji z KSeF. Łączy Bramę KSeF, workflowy izolowane per firma, stabilne kontrakty publiczne i porty rozszerzeń dla zewnętrznych systemów biznesowych.</p>
+          <div class="cta-row">
+            <a class="button primary" href="#getting-started">Zacznij z KSeF_2</a>
+            <a class="button" href="#architecture">Poznaj architekturę</a>
+          </div>
+        </div>
+        <div class="hero-panel" aria-label="Przepływ możliwości KSeF_2">
+          <div class="panel-top"><span class="mini-label">GRANICA FRAMEWORKA</span><span class="signal">niezależny od ERP</span></div>
+          <div class="flow">
+            <div class="flow-item"><span class="flow-icon">01</span><div><strong>Publiczne API</strong><span>stabilne żądania · typowane wyniki</span></div><span class="arrow">↓</span></div>
+            <div class="flow-item"><span class="flow-icon">02</span><div><strong>Workflow Engine</strong><span>firma · cykl życia · orkiestracja</span></div><span class="arrow">↓</span></div>
+            <div class="flow-item"><span class="flow-icon">03</span><div><strong>Brama KSeF</strong><span>uwierzytelnianie · sesje · protokół API</span></div><span class="arrow">↓</span></div>
+            <div class="flow-item"><span class="flow-icon">04</span><div><strong>KSeF Ministerstwa Finansów</strong><span>oficjalna usługa zewnętrzna</span></div><span class="arrow">✓</span></div>
+          </div>
+          <div class="metrics"><div class="metric"><b>FA(3)</b><span>natywny dokument</span></div><div class="metric"><b>Porty</b><span>wymienne granice</span></div><div class="metric"><b>Python 3.12</b><span>środowisko frameworka</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="container">
+        <div class="section-head reveal"><div><div class="eyebrow">Funkcje</div><h2>Stabilny rdzeń KSeF dla wielu produktów.</h2></div><p>KSeF_2 odpowiada za KSeF i kontrakty workflow. Szczegóły ERP pozostają w niezależnie wersjonowanych connectorach.</p></div>
+        <div class="cards feature-grid">
+          <article class="card reveal"><span class="card-number">01 / KOMUNIKACJA</span><h3>API KSeF</h3><p>Uwierzytelnianie, cykl życia sesji i tokenów, wymiana faktur, odczyt statusów, ograniczone ponowienia i bezpieczna diagnostyka za jedną granicą Gateway.</p></article>
+          <article class="card reveal"><span class="card-number">02 / ORKIESTRACJA</span><h3>Workflow Engine</h3><p>Workflowy biznesowe w kontekście firmy koordynują uwierzytelnianie, odbiór, wysyłkę, odświeżanie statusu i synchronizację bez ujawniania protokołu.</p></article>
+          <article class="card reveal"><span class="card-number">03 / INTEGRACJA</span><h3>Port Contracts</h3><p>Wąskie, neutralne kontrakty pozwalają connectorowi dostarczać dokumenty, odbierać natywne dokumenty KSeF i aktualizować status w systemie biznesowym.</p></article>
+          <article class="card reveal"><span class="card-number">04 / UDOSTĘPNIANIE</span><h3>Publiczne API</h3><p>Żądania niezależne od transportu i typowane wyniki workflow tworzą stabilną granicę dla aplikacji klienckich i hostów usług.</p></article>
+          <article class="card reveal"><span class="card-number">05 / PARSOWANIE</span><h3>Library API</h3><p>Wąskie API <code>parse_fa3</code> udostępnia zwalidowane dane FA(3) bez zależności od workflow, transportu, profili i ERP.</p></article>
+          <article class="card reveal"><span class="card-number">06 / OCHRONA</span><h3>Izolacja i bezpieczeństwo</h3><p>Dokładnie jeden kontekst firmy na wykonanie, zachowanie natywnego XML, zredagowane wyniki i jawne granice własności ograniczają ryzyko integracji.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="architecture">
+      <div class="container">
+        <div class="section-head reveal"><div><div class="eyebrow">Architektura</div><h2>Zależności wskazują stabilne kontrakty.</h2></div><p>Workflowy biznesowe zależą od portów należących do Core. Composition Root wiąże je z implementacjami zewnętrznymi bez uzależniania rdzenia od ERP.</p></div>
+        <div class="architecture architecture-wide reveal" aria-label="Architektura rdzenia KSeF_2">
+          <div class="arch-node"><b>Aplikacja kliencka</b><span>Aplikacja fakturowa, connector ERP, CLI, usługa lub inny produkt.</span></div>
+          <div class="arch-arrow">→</div>
+          <div class="arch-node accent"><b>Publiczne API</b><span>Możliwości biznesowe, autoryzacja i typowane wyniki workflow.</span></div>
+          <div class="arch-arrow">→</div>
+          <div class="arch-node accent"><b>Workflow Engine</b><span>Workflowy per firma, koordynacja i reguły cyklu życia.</span></div>
+          <div class="arch-arrow">→</div>
+          <div class="arch-node"><b>Port Contracts</b><span>Porty KSeF, systemów biznesowych, konfiguracji i usług technicznych.</span></div>
+        </div>
+        <div class="boundary-grid reveal">
+          <article class="boundary-card"><span>WEJŚCIE / SYSTEM BIZNESOWY</span><b>Business System Provider</b><p>Implementowany przez zewnętrzny connector. Odpowiada za całą komunikację i mapowanie właściwe dla ERP.</p></article>
+          <article class="boundary-card"><span>WYJŚCIE / KSEF</span><b>Brama KSeF</b><p>Wyłączna granica implementacyjna dla protokołu KSeF, uwierzytelniania, sesji i wersji API.</p></article>
+        </div>
+        <div class="principles"><div class="principle">KSeF_2 nie zależy od producenta ERP ani bazy danych ERP.</div><div class="principle">Connectory implementują Port Contracts i nie zmieniają Core.</div><div class="principle">Natywny XML KSeF pozostaje dokumentem źródłowym.</div><div class="principle">Dane biznesowe pozostają u ich zewnętrznego właściciela.</div></div>
+      </div>
+    </section>
+
+    <section id="getting-started">
+      <div class="container">
+        <div class="section-head reveal"><div><div class="eyebrow">Pierwsze kroki</div><h2>Wybierz potrzebną granicę.</h2></div><p>Użyj Library API do parsowania FA(3) albo integruj pełne możliwości biznesowe przez workflowy i Port Contracts.</p></div>
+        <div class="start-grid">
+          <article class="start-card reveal"><span class="step">1</span><div><h3>Zainstaluj projekt</h3><p>KSeF_2 obecnie wymaga Pythona 3.12.</p><pre><code>python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e '.[dev]'</code></pre></div></article>
+          <article class="start-card reveal"><span class="step">2</span><div><h3>Przetwórz dokument FA(3)</h3><p>Library API pozostaje niezależne od workflow i systemów zewnętrznych.</p><pre><code>from ksef_bridge.library import parse_fa3
+
+document = parse_fa3(xml_text)
+print(document.document_number)</code></pre></div></article>
+          <article class="start-card reveal"><span class="step">3</span><div><h3>Zbuduj connector</h3><p>Zaimplementuj tylko porty systemu biznesowego wymagane przez workflow, a następnie powiąż implementację w Composition Root.</p><pre><code>ERP → Business System Provider
+    → KSeF_2 Port Contracts
+    → Business Workflows</code></pre></div></article>
+        </div>
+        <div class="notice">Poświadczenia KSeF, certyfikaty i mapowania firm są konfiguracją uruchomieniową. Nigdy nie umieszczaj sekretów ani XML faktur w repozytorium lub publicznych logach.</div>
+      </div>
+    </section>
+
+    <section id="ecosystem">
+      <div class="container">
+        <div class="section-head reveal"><div><div class="eyebrow">Ekosystem</div><h2>Jeden rdzeń KSeF. Wymienne connectory.</h2></div><p>Comarch ERP Optima jest jedną zewnętrzną implementacją Business System Provider, a nie komponentem KSeF_2.</p></div>
+        <div class="ecosystem-flow reveal" aria-label="Przepływ ekosystemu connectorów ERP">
+          <div class="ecosystem-node"><b>ERP / system biznesowy</b><span>właściciel faktur i danych biznesowych</span></div><div class="arch-arrow">→</div>
+          <div class="ecosystem-node"><b>Connector ERP</b><span>implementuje Business System Ports</span></div><div class="arch-arrow">→</div>
+          <div class="ecosystem-node core"><b>KSeF_2</b><span>workflowy, kontrakty i Gateway</span></div><div class="arch-arrow">→</div>
+          <div class="ecosystem-node"><b>KSeF Ministerstwa Finansów</b><span>oficjalne API</span></div>
+        </div>
+        <div class="connector-grid">
+          <a class="connector-card current reveal" href="https://github.com/KrzysztofOle/ksef-optima-connector"><span class="badge green">Osobny projekt</span><h3>Comarch Optima Connector</h3><p>Pierwszy zewnętrzny Business System Provider korzystający z kontraktów KSeF_2.</p></a>
+          <article class="connector-card reveal"><span class="badge blue">Możliwy</span><h3>SAP Connector</h3><p>Przyszły provider może użyć tych samych kontraktów Core bez zmiany KSeF_2.</p></article>
+          <article class="connector-card reveal"><span class="badge blue">Możliwy</span><h3>Enova Connector</h3><p>Mapowanie i transport właściwe dla ERP pozostają w niezależnym projekcie.</p></article>
+          <article class="connector-card reveal"><span class="badge blue">Możliwy</span><h3>Symfonia Connector</h3><p>Connector zna szczegóły producenta, a KSeF_2 zachowuje neutralność.</p></article>
+          <article class="connector-card reveal"><span class="badge blue">Rozszerzalny</span><h3>Twój connector</h3><p>Własna aplikacja może zaimplementować te same Port Contracts dla swojego systemu biznesowego.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="container narrow">
+        <div class="section-head reveal"><div><div class="eyebrow">FAQ</div><h2>Jasne granice odpowiedzialności.</h2></div></div>
+        <div class="faq-list reveal">
+          <details><summary>Czy KSeF_2 jest integracją z Optimą?</summary><p>Nie. KSeF_2 jest niezależny od ERP. Integracja z Optimą znajduje się w osobnym projekcie <a href="https://github.com/KrzysztofOle/ksef-optima-connector">ksef-optima-connector</a> i korzysta z KSeF_2 jako niezależnej zależności.</p></details>
+          <details><summary>Czy KSeF_2 łączy się z bazą ERP?</summary><p>Nie. Dostęp do bazy i API konkretnego producenta należy do zewnętrznego Business System Provider. KSeF_2 widzi wyłącznie własne Port Contracts.</p></details>
+          <details><summary>Czym różni się Public API od Library API?</summary><p>Public API udostępnia workflowy biznesowe w kontekście firmy i typowane wyniki. Library API jest mniejszą granicą do parsowania dokumentów FA(3).</p></details>
+          <details><summary>Czy mogę utworzyć connector dla innego ERP?</summary><p>Tak. Zaimplementuj wymagane Business System Ports, pozostaw mapowanie producenta wewnątrz connectora i powiąż go przez Composition Root. Core KSeF_2 nie wymaga zmiany.</p></details>
+          <details><summary>Czy KSeF_2 jest programem do fakturowania lub księgowości?</summary><p>Nie. Udostępnia komunikację z KSeF i możliwości workflow. Aplikacje klienckie oraz systemy ERP zachowują własne modele biznesowe i własność danych.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section id="docs">
+      <div class="container">
+        <div class="section-head reveal"><div><div class="eyebrow">Linki projektu</div><h2>Poznaj kod i granice projektów.</h2></div><p>Repozytoria implementacyjne mogą wymagać uprawnień. Publiczna strona nie zawiera poświadczeń, faktur testowych ani kontrolowanych materiałów dowodowych.</p></div>
+        <div class="docs-grid">
+          <a class="doc-link" href="https://github.com/KrzysztofOle/KSeF_2"><b>Rdzeń KSeF_2</b><span>Implementacja frameworka, architektura i kontrakty workflow.</span></a>
+          <a class="doc-link" href="https://github.com/KrzysztofOle/ksef-optima-connector"><b>Connector Optimy</b><span>Niezależny Business System Provider dla Comarch ERP Optima.</span></a>
+          <a class="doc-link" href="https://github.com/KrzysztofOle/KSeF_2-site"><b>Źródła strony</b><span>Statyczna, dwujęzyczna strona GitHub Pages.</span></a>
+          <a class="doc-link" href="#architecture"><b>Opis architektury</b><span>Core, porty, providery, Gateway i kierunek zależności.</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-row"><span>© <span data-year></span> KSeF_2 · Stabilny rdzeń KSeF, wymienne connectory.</span><span><a href="https://github.com/KrzysztofOle/KSeF_2-site">GitHub</a> · <a href="index.html">English</a></span></div></footer>
+</body>
+</html>
