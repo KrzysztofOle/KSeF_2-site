@@ -8,6 +8,7 @@ on:
       - "index.html"
       - "pl.html"
       - "assets/**"
+      - "scripts/**"
       - ".nojekyll"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
@@ -27,6 +28,9 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+
+      - name: Validate pages and internal links
+        run: python scripts/validate_site.py
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
