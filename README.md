@@ -25,3 +25,19 @@ the Optima connector. KSeF_2 contains no Optima runtime, SQL Server configuratio
 or dependency on a specific ERP.
 
 Last synchronized: 2026-07-18.
+
+## Local preview and verification
+
+The website is plain HTML/CSS/JavaScript. From repository root:
+
+```sh
+python -m http.server 8000
+```
+
+Open `http://127.0.0.1:8000/` or `/pl.html`. The repository includes an offline HTML/link validator:
+
+```sh
+python scripts/validate_site.py
+```
+
+These instructions only serve a local preview and do not deploy to GitHub Pages. Side branches are described in [BRANCHES_AUDIT.md](BRANCHES_AUDIT.md).
